@@ -1,5 +1,7 @@
 import 'package:admin_panel/screens/sub_category/subcategory_screen.dart';
 import 'package:admin_panel/screens/variants_type/variant_type_screen.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../brands/brand_screen.dart';
 import '../../category/category_screen.dart';
@@ -9,51 +11,45 @@ import '../../notification/notification_screen.dart';
 import '../../order/order_screen.dart';
 import '../../posters/poster_screen.dart';
 import '../../variants/variants_screen.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
-class MainScreenProvider extends ChangeNotifier{
-  Widget selectedScreen = DashboardScreen();
-
-
+class MainScreenProvider extends ChangeNotifier {
+  Widget selectedScreen = const DashboardScreen();
 
   navigateToScreen(String screenName) {
     switch (screenName) {
       case 'Dashboard':
-        selectedScreen = DashboardScreen();
+        selectedScreen = const DashboardScreen();
         break; // Break statement needed here
       case 'Category':
-        selectedScreen = CategoryScreen();
+        selectedScreen = const CategoryScreen();
         break;
       case 'SubCategory':
-        selectedScreen = SubCategoryScreen();
+        selectedScreen = const SubCategoryScreen();
         break;
       case 'Brands':
-        selectedScreen = BrandScreen();
+        selectedScreen = const BrandScreen();
         break;
       case 'VariantType':
-        selectedScreen = VariantsTypeScreen();
+        selectedScreen = const VariantsTypeScreen();
         break;
       case 'Variants':
-        selectedScreen = VariantsScreen();
+        selectedScreen = const VariantsScreen();
         break;
       case 'Coupon':
-        selectedScreen = CouponCodeScreen();
+        selectedScreen = const CouponCodeScreen();
         break;
       case 'Poster':
-        selectedScreen = PosterScreen();
+        selectedScreen = const PosterScreen();
         break;
       case 'Order':
-        selectedScreen = OrderScreen();
+        selectedScreen = const OrderScreen();
         break;
       case 'Notifications':
-        selectedScreen = NotificationScreen();
+        selectedScreen = const NotificationScreen();
         break;
       default:
-        selectedScreen = DashboardScreen();
+        selectedScreen = const DashboardScreen();
     }
     notifyListeners();
   }
-  
-  
 }

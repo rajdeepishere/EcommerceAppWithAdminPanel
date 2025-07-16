@@ -1,28 +1,27 @@
-
 import 'package:admin_panel/screens/dashboard/components/dashboard_header.dart';
 import 'package:admin_panel/screens/dashboard/components/product_summary_section.dart';
 import 'package:admin_panel/utility/extensions.dart';
-
-
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+
 import '../../utility/constants.dart';
 import 'components/add_product_form.dart';
 import 'components/order_details_section.dart';
 import 'components/product_list_section.dart';
 
-
 class DashboardScreen extends StatelessWidget {
+  const DashboardScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
         primary: false,
-        padding: EdgeInsets.all(defaultPadding),
+        padding: const EdgeInsets.all(defaultPadding),
         child: Column(
           children: [
-            DashBoardHeader(),
-            Gap(defaultPadding),
+            const DashBoardHeader(),
+            const Gap(defaultPadding),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -41,7 +40,7 @@ class DashboardScreen extends StatelessWidget {
                           ),
                           ElevatedButton.icon(
                             style: TextButton.styleFrom(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                 horizontal: defaultPadding * 1.5,
                                 vertical: defaultPadding,
                               ),
@@ -49,26 +48,27 @@ class DashboardScreen extends StatelessWidget {
                             onPressed: () {
                               showAddProductForm(context, null);
                             },
-                            icon: Icon(Icons.add),
-                            label: Text("Add New"),
+                            icon: const Icon(Icons.add),
+                            label: const Text("Add New"),
                           ),
-                          Gap(20),
+                          const Gap(20),
                           IconButton(
                               onPressed: () {
-                                context.dataProvider.getAllProduct(showSnack: true);
+                                context.dataProvider
+                                    .getAllProduct(showSnack: true);
                               },
-                              icon: Icon(Icons.refresh)),
+                              icon: const Icon(Icons.refresh)),
                         ],
                       ),
-                      Gap(defaultPadding),
-                      ProductSummarySection(),
-                      Gap(defaultPadding),
-                      ProductListSection(),
+                      const Gap(defaultPadding),
+                      const ProductSummarySection(),
+                      const Gap(defaultPadding),
+                      const ProductListSection(),
                     ],
                   ),
                 ),
-                SizedBox(width: defaultPadding),
-                Expanded(
+                const SizedBox(width: defaultPadding),
+                const Expanded(
                   flex: 2,
                   child: OrderDetailsSection(),
                 ),

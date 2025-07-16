@@ -18,17 +18,20 @@ class CustomNetworkImage extends StatelessWidget {
       imageUrl,
       fit: fit,
       scale: scale,
-      loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+      loadingBuilder: (BuildContext context, Widget child,
+          ImageChunkEvent? loadingProgress) {
         if (loadingProgress == null) return child;
         return Center(
           child: CircularProgressIndicator(
             value: loadingProgress.expectedTotalBytes != null
-                ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
-                : null,  // Progress indicator.
+                ? loadingProgress.cumulativeBytesLoaded /
+                    loadingProgress.expectedTotalBytes!
+                : null, // Progress indicator.
           ),
         );
       },
-      errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+      errorBuilder:
+          (BuildContext context, Object exception, StackTrace? stackTrace) {
         return const Icon(Icons.error, color: Colors.red);
       },
     );

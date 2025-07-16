@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import '../../models/api_response.dart';
 import '../../models/coupon.dart';
 import '../../models/my_notification.dart';
@@ -14,6 +17,7 @@ import '../../../models/category.dart';
 import '../../models/brand.dart';
 import '../../models/sub_category.dart';
 import '../../models/variant.dart';
+import 'package:http/http.dart' as http;
 
 class DataProvider extends ChangeNotifier {
   HttpService service = HttpService();
@@ -74,11 +78,11 @@ class DataProvider extends ChangeNotifier {
 
   Future<List<Category>> getAllCategory({bool showSnack = false}) async {
     try {
-      Response response = await service.getItems(endpointUrl: 'categories');
-      if (response.isOk) {
+      http.Response response = await service.getItems(endpointUrl: 'categories');
+      if (response.statusCode == 200) {
         ApiResponse<List<Category>> apiResponse =
             ApiResponse<List<Category>>.fromJson(
-                response.body,
+                jsonDecode(response.body),
                 (json) => (json as List)
                     .map((item) => Category.fromJson(item))
                     .toList());
@@ -108,11 +112,11 @@ class DataProvider extends ChangeNotifier {
 
   Future<List<SubCategory>> getAllSubCategory({bool showSnack = false}) async {
     try {
-      Response response = await service.getItems(endpointUrl: 'subCategories');
-      if (response.isOk) {
+      http.Response response = await service.getItems(endpointUrl: 'subCategories');
+      if (response.statusCode == 200) {
         ApiResponse<List<SubCategory>> apiResponse =
             ApiResponse<List<SubCategory>>.fromJson(
-                response.body,
+                jsonDecode(response.body),
                 (json) => (json as List)
                     .map((item) => SubCategory.fromJson(item))
                     .toList());
@@ -142,11 +146,11 @@ class DataProvider extends ChangeNotifier {
 
   Future<List<Brand>> getAllBrands({bool showSnack = false}) async {
     try {
-      Response response = await service.getItems(endpointUrl: 'brands');
-      if (response.isOk) {
+      http.Response response = await service.getItems(endpointUrl: 'brands');
+      if (response.statusCode == 200) {
         ApiResponse<List<Brand>> apiResponse =
             ApiResponse<List<Brand>>.fromJson(
-                response.body,
+                jsonDecode(response.body),
                 (json) => (json as List)
                     .map((item) => Brand.fromJson(item))
                     .toList());
@@ -176,11 +180,11 @@ class DataProvider extends ChangeNotifier {
 
   Future<List<VariantType>> getAllVariantType({bool showSnack = false}) async {
     try {
-      Response response = await service.getItems(endpointUrl: 'variantTypes');
-      if (response.isOk) {
+      http.Response response = await service.getItems(endpointUrl: 'variantTypes');
+      if (response.statusCode == 200) {
         ApiResponse<List<VariantType>> apiResponse =
             ApiResponse<List<VariantType>>.fromJson(
-          response.body,
+          jsonDecode(response.body),
           (json) =>
               (json as List).map((item) => VariantType.fromJson(item)).toList(),
         );
@@ -211,11 +215,11 @@ class DataProvider extends ChangeNotifier {
 
   Future<List<Variant>> getAllVariant({bool showSnack = false}) async {
     try {
-      Response response = await service.getItems(endpointUrl: 'variants');
-      if (response.isOk) {
+      http.Response response = await service.getItems(endpointUrl: 'variants');
+      if (response.statusCode == 200) {
         ApiResponse<List<Variant>> apiResponse =
             ApiResponse<List<Variant>>.fromJson(
-          response.body,
+          jsonDecode(response.body),
           (json) =>
               (json as List).map((item) => Variant.fromJson(item)).toList(),
         );
@@ -246,10 +250,10 @@ class DataProvider extends ChangeNotifier {
 
   Future<void> getAllProduct({bool showSnack = false}) async {
     try {
-      Response response = await service.getItems(endpointUrl: 'products');
+      http.Response response = await service.getItems(endpointUrl: 'products');
       ApiResponse<List<Product>> apiResponse =
           ApiResponse<List<Product>>.fromJson(
-        response.body,
+        jsonDecode(response.body),
         (json) => (json as List).map((item) => Product.fromJson(item)).toList(),
       );
       _allProducts = apiResponse.data ?? [];
@@ -290,11 +294,11 @@ class DataProvider extends ChangeNotifier {
 
   Future<List<Poster>> getAllPosters({bool showSnack = false}) async {
     try {
-      Response response = await service.getItems(endpointUrl: 'posters');
-      if (response.isOk) {
+      http.Response response = await service.getItems(endpointUrl: 'posters');
+      if (response.statusCode == 200) {
         ApiResponse<List<Poster>> apiResponse =
             ApiResponse<List<Poster>>.fromJson(
-          response.body,
+          jsonDecode(response.body),
           (json) =>
               (json as List).map((item) => Poster.fromJson(item)).toList(),
         );
@@ -324,11 +328,11 @@ class DataProvider extends ChangeNotifier {
 
   Future<List<Coupon>> getAllCoupons({bool showSnack = false}) async {
     try {
-      Response response = await service.getItems(endpointUrl: 'couponCodes');
-      if (response.isOk) {
+      http.Response response = await service.getItems(endpointUrl: 'couponCodes');
+      if (response.statusCode == 200) {
         ApiResponse<List<Coupon>> apiResponse =
             ApiResponse<List<Coupon>>.fromJson(
-                response.body,
+                jsonDecode(response.body),
                 (json) => (json as List)
                     .map((item) => Coupon.fromJson(item))
                     .toList());
@@ -359,12 +363,12 @@ class DataProvider extends ChangeNotifier {
   Future<List<MyNotification>> getAllNotifications(
       {bool showSnack = false}) async {
     try {
-      Response response =
+      http.Response response =
           await service.getItems(endpointUrl: 'notification/all-notification');
-      if (response.isOk) {
+      if (response.statusCode == 200) {
         ApiResponse<List<MyNotification>> apiResponse =
             ApiResponse<List<MyNotification>>.fromJson(
-          response.body,
+          jsonDecode(response.body),
           (json) => (json as List)
               .map((item) => MyNotification.fromJson(item))
               .toList(),
@@ -395,14 +399,14 @@ class DataProvider extends ChangeNotifier {
 
   Future<List<Order>> getAllOrders({bool showSnack = false}) async {
     try {
-      Response response = await service.getItems(endpointUrl: 'orders');
-      if (response.isOk) {
+      http.Response response = await service.getItems(endpointUrl: 'orders');
+      if (response.statusCode == 200) {
         ApiResponse<List<Order>> apiResponse =
             ApiResponse<List<Order>>.fromJson(
-          response.body,
+          jsonDecode(response.body),
           (json) => (json as List).map((item) => Order.fromJson(item)).toList(),
         );
-        print(apiResponse.message);
+        log(apiResponse.message);
         _allOrders = apiResponse.data ?? [];
         _filteredOrders = List.from(_allOrders);
         notifyListeners();

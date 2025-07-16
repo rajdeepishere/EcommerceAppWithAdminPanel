@@ -1,12 +1,11 @@
-import '../../core/data/data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'components/custom_app_bar.dart';
+
 import '../../../../widget/product_grid_view.dart';
+import '../../core/data/data_provider.dart';
 import 'components/category_selector.dart';
+import 'components/custom_app_bar.dart';
 import 'components/poster_section.dart';
-
-
 
 class ProductListScreen extends StatelessWidget {
   const ProductListScreen({super.key});
@@ -24,11 +23,11 @@ class ProductListScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Hello Sina",
+                  "Hello User",
                   style: Theme.of(context).textTheme.displayLarge,
                 ),
                 Text(
-                  "Lets gets somethings?",
+                  "Lets gets something?",
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 const PosterSection(),

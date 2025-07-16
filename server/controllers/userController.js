@@ -18,13 +18,13 @@ const getUserById = asyncHandler(async (req, res) => {
 
 // Register user
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, password } = req.body;
+    const {email, password } = req.body;
 
-    if (!name || !password) {
+    if (!email || !password) {
         return res.status(400).json({ success: false, message: "Name and password are required." });
     }
 
-    const user = new User({ name, password });
+    const user = new User({ email, password });
     await user.save();
 
     res.json({ success: true, message: "User created successfully.", data: null });
@@ -32,9 +32,9 @@ const registerUser = asyncHandler(async (req, res) => {
 
 // Login user
 const loginUser = asyncHandler(async (req, res) => {
-    const { name, password } = req.body;
+    const { email, password } = req.body;
 
-    const user = await User.findOne({ name });
+    const user = await User.findOne({ email });
     if (!user || user.password !== password) {
         return res.status(401).json({ success: false, message: "Invalid name or password." });
     }
@@ -44,15 +44,15 @@ const loginUser = asyncHandler(async (req, res) => {
 
 // Update user
 const updateUser = asyncHandler(async (req, res) => {
-    const { name, password } = req.body;
+    const { email, password } = req.body;
 
-    if (!name || !password) {
+    if (!email || !password) {
         return res.status(400).json({ success: false, message: "Name and password are required." });
     }
 
     const updatedUser = await User.findByIdAndUpdate(
         req.params.id,
-        { name, password },
+        { email, password },
         { new: true }
     );
 

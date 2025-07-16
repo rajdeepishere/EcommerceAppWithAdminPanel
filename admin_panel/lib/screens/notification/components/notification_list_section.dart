@@ -1,26 +1,25 @@
 import 'package:admin_panel/utility/extensions.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/data/data_provider.dart';
 import '../../../models/my_notification.dart';
-import 'view_notification_form.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../utility/color_list.dart';
 import '../../../utility/constants.dart';
-
+import 'view_notification_form.dart';
 
 class NotificationListSection extends StatelessWidget {
   const NotificationListSection({
     super.key,
-  }) ;
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(defaultPadding),
+      decoration: const BoxDecoration(
         color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +35,7 @@ class NotificationListSection extends StatelessWidget {
                 return DataTable(
                   columnSpacing: defaultPadding,
                   // minWidth: 600,
-                  columns: [
+                  columns: const [
                     DataColumn(
                       label: Text("Title"),
                     ),
@@ -55,10 +54,13 @@ class NotificationListSection extends StatelessWidget {
                   ],
                   rows: List.generate(
                     dataProvider.notifications.length,
-                    (index) => notificationDataRow(dataProvider.notifications[index], index + 1, edit: () {
-                      viewNotificationStatics(context, dataProvider.notifications[index]);
+                    (index) => notificationDataRow(
+                        dataProvider.notifications[index], index + 1, edit: () {
+                      viewNotificationStatics(
+                          context, dataProvider.notifications[index]);
                     }, delete: () {
-                      context.notificationProvider.deleteNotification(dataProvider.notifications[index]);
+                      context.notificationProvider.deleteNotification(
+                          dataProvider.notifications[index]);
                     }),
                   ),
                 );
@@ -71,7 +73,8 @@ class NotificationListSection extends StatelessWidget {
   }
 }
 
-DataRow notificationDataRow(MyNotification notificationInfo, int index, {Function? edit, Function? delete}) {
+DataRow notificationDataRow(MyNotification notificationInfo, int index,
+    {Function? edit, Function? delete}) {
   return DataRow(
     cells: [
       DataCell(
@@ -99,7 +102,7 @@ DataRow notificationDataRow(MyNotification notificationInfo, int index, {Functio
           onPressed: () {
             if (edit != null) edit();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.remove_red_eye_sharp,
             color: Colors.white,
           ))),
@@ -107,7 +110,7 @@ DataRow notificationDataRow(MyNotification notificationInfo, int index, {Functio
           onPressed: () {
             if (delete != null) delete();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.delete,
             color: Colors.red,
           ))),

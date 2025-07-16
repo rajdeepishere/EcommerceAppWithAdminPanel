@@ -16,7 +16,7 @@ class CustomDropdown<T> extends StatelessWidget {
     this.validator,
     this.hintText = 'Select an option',
     required this.displayItem,
-  }) ;
+  });
 
   @override
   Widget build(BuildContext context) {

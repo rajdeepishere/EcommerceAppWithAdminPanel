@@ -1,12 +1,12 @@
 import 'package:admin_panel/screens/sub_category/components/add_subcategory_form.dart';
 import 'package:admin_panel/utility/extensions.dart';
-import '../../../core/data/data_provider.dart';
-import '../../../models/sub_category.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../core/data/data_provider.dart';
+import '../../../models/sub_category.dart';
 import '../../../utility/color_list.dart';
 import '../../../utility/constants.dart';
-
 
 class SubCategoryListSection extends StatelessWidget {
   const SubCategoryListSection({
@@ -16,10 +16,10 @@ class SubCategoryListSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(defaultPadding),
+      decoration: const BoxDecoration(
         color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +35,7 @@ class SubCategoryListSection extends StatelessWidget {
                 return DataTable(
                   columnSpacing: defaultPadding,
                   // minWidth: 600,
-                  columns: [
+                  columns: const [
                     DataColumn(
                       label: Text("SubCategory Name"),
                     ),
@@ -58,10 +58,12 @@ class SubCategoryListSection extends StatelessWidget {
                       dataProvider.subCategories[index],
                       index + 1,
                       edit: () {
-                        showAddSubCategoryForm(context, dataProvider.subCategories[index]);
+                        showAddSubCategoryForm(
+                            context, dataProvider.subCategories[index]);
                       },
                       delete: () {
-                        context.subCategoryProvider.deleteSubCategory(dataProvider.subCategories[index]);
+                        context.subCategoryProvider.deleteSubCategory(
+                            dataProvider.subCategories[index]);
                       },
                     ),
                   ),
@@ -75,7 +77,8 @@ class SubCategoryListSection extends StatelessWidget {
   }
 }
 
-DataRow subCategoryDataRow(SubCategory subCatInfo, int index, {Function? edit, Function? delete}) {
+DataRow subCategoryDataRow(SubCategory subCatInfo, int index,
+    {Function? edit, Function? delete}) {
   return DataRow(
     cells: [
       DataCell(
@@ -103,7 +106,7 @@ DataRow subCategoryDataRow(SubCategory subCatInfo, int index, {Function? edit, F
           onPressed: () {
             if (edit != null) edit();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.edit,
             color: Colors.white,
           ))),
@@ -111,7 +114,7 @@ DataRow subCategoryDataRow(SubCategory subCatInfo, int index, {Function? edit, F
           onPressed: () {
             if (delete != null) delete();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.delete,
             color: Colors.red,
           ))),

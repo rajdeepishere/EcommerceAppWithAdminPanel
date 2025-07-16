@@ -1,11 +1,12 @@
-import '../login_screen/login_screen.dart';
-import '../my_address_screen/my_address_screen.dart';
-import '../../utility/animation/open_container_wrapper.dart';
-import '../../utility/extensions.dart';
-import '../../widget/navigation_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../utility/animation/open_container_wrapper.dart';
 import '../../utility/app_color.dart';
+import '../../utility/extensions.dart';
+import '../../widget/navigation_tile.dart';
+import '../login_screen/login_screen.dart';
+import '../my_address_screen/my_address_screen.dart';
 import '../my_order_screen/my_order_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -14,14 +15,19 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Assuming your theme and colors are defined elsewhere in your app
-    const TextStyle linkStyle = TextStyle(fontSize: 18, fontWeight: FontWeight.w600);
-    const TextStyle titleStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 20);
+    const TextStyle linkStyle =
+        TextStyle(fontSize: 18, fontWeight: FontWeight.w600);
+    const TextStyle titleStyle =
+        TextStyle(fontWeight: FontWeight.bold, fontSize: 20);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           "My Account",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColor.darkOrange),
+          style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: AppColor.darkOrange),
         ),
       ),
       body: ListView(
@@ -39,7 +45,7 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(height: 20),
           Center(
             child: Text(
-              "${context.userProvider.getLoginUsr()?.name}",
+              "${context.userProvider.getLoginUsr()?.email}",
               style: titleStyle,
             ),
           ),
@@ -65,8 +71,10 @@ class ProfileScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColor.darkOrange,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
               ),
               onPressed: () {
                 context.userProvider.logOutUser();

@@ -1,15 +1,14 @@
 import 'package:admin_panel/screens/sub_category/provider/subcategory_provider.dart';
 import 'package:admin_panel/widgets/custom_textfield.dart';
-
-import '../../../models/sub_category.dart';
-import '../../../utility/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
-import '../../../models/category.dart';
-import '../../../utility/constants.dart';
-import '../../../widgets/custom_dropdown.dart';
 
+import '../../../models/category.dart';
+import '../../../models/sub_category.dart';
+import '../../../utility/constants.dart';
+import '../../../utility/extensions.dart';
+import '../../../widgets/custom_dropdown.dart';
 
 class SubCategorySubmitForm extends StatelessWidget {
   final SubCategory? subCategory;
@@ -24,7 +23,7 @@ class SubCategorySubmitForm extends StatelessWidget {
       child: Form(
         key: context.subCategoryProvider.addSubCategoryFormKey,
         child: Container(
-          padding: EdgeInsets.all(defaultPadding),
+          padding: const EdgeInsets.all(defaultPadding),
           width: size.width * 0.5,
           decoration: BoxDecoration(
             color: bgColor,
@@ -33,7 +32,7 @@ class SubCategorySubmitForm extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Gap(defaultPadding),
+              const Gap(defaultPadding),
               Row(
                 children: [
                   Expanded(
@@ -41,9 +40,11 @@ class SubCategorySubmitForm extends StatelessWidget {
                       builder: (context, subCatProvider, child) {
                         return CustomDropdown(
                           initialValue: subCatProvider.selectedCategory,
-                          hintText: subCatProvider.selectedCategory?.name ?? 'Select category',
+                          hintText: subCatProvider.selectedCategory?.name ??
+                              'Select category',
                           items: context.dataProvider.categories,
-                          displayItem: (Category? category) => category?.name ?? '',
+                          displayItem: (Category? category) =>
+                              category?.name ?? '',
                           onChanged: (newValue) {
                             if (newValue != null) {
                               subCatProvider.selectedCategory = newValue;
@@ -62,7 +63,8 @@ class SubCategorySubmitForm extends StatelessWidget {
                   ),
                   Expanded(
                     child: CustomTextField(
-                      controller: context.subCategoryProvider.subCategoryNameCtrl,
+                      controller:
+                          context.subCategoryProvider.subCategoryNameCtrl,
                       labelText: 'Sub Category Name',
                       onSave: (val) {},
                       validator: (value) {
@@ -75,7 +77,7 @@ class SubCategorySubmitForm extends StatelessWidget {
                   ),
                 ],
               ),
-              Gap(defaultPadding * 2),
+              const Gap(defaultPadding * 2),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -87,9 +89,9 @@ class SubCategorySubmitForm extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pop(); // Close the popup
                     },
-                    child: Text('Cancel'),
+                    child: const Text('Cancel'),
                   ),
-                  Gap(defaultPadding),
+                  const Gap(defaultPadding),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
@@ -97,13 +99,17 @@ class SubCategorySubmitForm extends StatelessWidget {
                     ),
                     onPressed: () {
                       // Validate and save the form
-                      if (context.subCategoryProvider.addSubCategoryFormKey.currentState!.validate()) {
-                        context.subCategoryProvider.addSubCategoryFormKey.currentState!.save();
+                      if (context.subCategoryProvider.addSubCategoryFormKey
+                          .currentState!
+                          .validate()) {
+                        context.subCategoryProvider.addSubCategoryFormKey
+                            .currentState!
+                            .save();
                         context.subCategoryProvider.submitSubCategory();
                         Navigator.of(context).pop();
                       }
                     },
-                    child: Text('Submit'),
+                    child: const Text('Submit'),
                   ),
                 ],
               ),
@@ -122,7 +128,9 @@ void showAddSubCategoryForm(BuildContext context, SubCategory? subCategory) {
     builder: (BuildContext context) {
       return AlertDialog(
         backgroundColor: bgColor,
-        title: Center(child: Text('Add Sub Category'.toUpperCase(), style: TextStyle(color: primaryColor))),
+        title: Center(
+            child: Text('Add Sub Category'.toUpperCase(),
+                style: const TextStyle(color: primaryColor))),
         content: SubCategorySubmitForm(subCategory: subCategory),
       );
     },

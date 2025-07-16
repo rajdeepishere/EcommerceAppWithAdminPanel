@@ -19,9 +19,11 @@ import notificationRoutes from './routes/notificationRoute.js';
 dotenv.config();
 
 const app = express();
-//?Middle wair
+//Middle ware
 app.use(cors({ origin: '*' }))
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+
 //? setting static folder path
 app.use('/image/products', express.static('public/products'));
 app.use('/image/category', express.static('public/category'));

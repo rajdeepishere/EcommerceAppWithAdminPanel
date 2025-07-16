@@ -1,12 +1,13 @@
 import 'package:admin_panel/utility/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../utility/constants.dart';
 
 class OrderHeader extends StatelessWidget {
   const OrderHeader({
     super.key,
-  }) ;
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class OrderHeader extends StatelessWidget {
           "Orders",
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        Spacer(flex: 2),
+        const Spacer(flex: 2),
         Expanded(child: SearchField(
           onChange: (val) {
             context.dataProvider.filterOrders(val);
@@ -27,14 +28,13 @@ class OrderHeader extends StatelessWidget {
   }
 }
 
-
 class SearchField extends StatelessWidget {
   final Function(String) onChange;
 
   const SearchField({
-    Key? key,
+    super.key,
     required this.onChange,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,18 +43,18 @@ class SearchField extends StatelessWidget {
         hintText: "Search",
         fillColor: secondaryColor,
         filled: true,
-        border: OutlineInputBorder(
+        border: const OutlineInputBorder(
           borderSide: BorderSide.none,
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         suffixIcon: InkWell(
           onTap: () {},
           child: Container(
-            padding: EdgeInsets.all(defaultPadding * 0.75),
-            margin: EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-            decoration: BoxDecoration(
+            padding: const EdgeInsets.all(defaultPadding * 0.75),
+            margin: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+            decoration: const BoxDecoration(
               color: primaryColor,
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
             child: SvgPicture.asset("assets/icons/Search.svg"),
           ),

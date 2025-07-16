@@ -28,7 +28,6 @@ class DashBoardHeader extends StatelessWidget {
   }
 }
 
-
 class SearchField extends StatelessWidget {
   final Function(String) onChange;
 

@@ -1,11 +1,11 @@
 import 'package:admin_panel/utility/extensions.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/data/data_provider.dart';
 import '../../../models/product.dart';
-import 'add_product_form.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../utility/constants.dart';
+import 'add_product_form.dart';
 
 class ProductListSection extends StatelessWidget {
   const ProductListSection({
@@ -15,20 +15,17 @@ class ProductListSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(defaultPadding),
+      decoration: const BoxDecoration(
         color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             "All Products",
-            style: Theme
-                .of(context)
-                .textTheme
-                .titleMedium,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
           SizedBox(
             width: double.infinity,
@@ -37,7 +34,7 @@ class ProductListSection extends StatelessWidget {
                 return DataTable(
                   columnSpacing: defaultPadding,
                   // minWidth: 600,
-                  columns: [
+                  columns: const [
                     DataColumn(
                       label: Text("Product Name"),
                     ),
@@ -59,12 +56,17 @@ class ProductListSection extends StatelessWidget {
                   ],
                   rows: List.generate(
                     dataProvider.products.length,
-                        (index) => productDataRow(dataProvider.products[index],edit: () {
-                          showAddProductForm(context, dataProvider.products[index]);
-                        },
-                          delete: () {
-                            context.dashBoardProvider.deleteProduct(dataProvider.products[index]);
-                          },),
+                    (index) => productDataRow(
+                      dataProvider.products[index],
+                      edit: () {
+                        showAddProductForm(
+                            context, dataProvider.products[index]);
+                      },
+                      delete: () {
+                        context.dashBoardProvider
+                            .deleteProduct(dataProvider.products[index]);
+                      },
+                    ),
                   ),
                 );
               },
@@ -76,7 +78,8 @@ class ProductListSection extends StatelessWidget {
   }
 }
 
-DataRow productDataRow(Product productInfo,{Function? edit, Function? delete}) {
+DataRow productDataRow(Product productInfo,
+    {Function? edit, Function? delete}) {
   return DataRow(
     cells: [
       DataCell(
@@ -86,8 +89,9 @@ DataRow productDataRow(Product productInfo,{Function? edit, Function? delete}) {
               productInfo.images?.first.url ?? '',
               height: 30,
               width: 30,
-              errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                return Icon(Icons.error);
+              errorBuilder: (BuildContext context, Object exception,
+                  StackTrace? stackTrace) {
+                return const Icon(Icons.error);
               },
             ),
             Padding(
@@ -99,12 +103,14 @@ DataRow productDataRow(Product productInfo,{Function? edit, Function? delete}) {
       ),
       DataCell(Text(productInfo.proCategoryId?.name ?? '')),
       DataCell(Text(productInfo.proSubCategoryId?.name ?? '')),
-      DataCell(Text('${productInfo.price}'),),
+      DataCell(
+        Text('${productInfo.price}'),
+      ),
       DataCell(IconButton(
           onPressed: () {
             if (edit != null) edit();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.edit,
             color: Colors.white,
           ))),
@@ -112,7 +118,7 @@ DataRow productDataRow(Product productInfo,{Function? edit, Function? delete}) {
           onPressed: () {
             if (delete != null) delete();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.delete,
             color: Colors.red,
           ))),

@@ -1,9 +1,8 @@
 import 'package:ecommerce_app/utility/extensions.dart';
-
-import '../../../utility/utility_extention.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cart/model/cart_model.dart';
 
+import '../../../utility/utility_extention.dart';
 
 class CartListSection extends StatelessWidget {
   final List<CartModel> cartProducts;
@@ -50,17 +49,21 @@ class CartListSection extends StatelessWidget {
                             cartItem.productImages.safeElementAt(0) ?? '',
                             width: 100,
                             height: 90,
-                            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                            loadingBuilder: (BuildContext context, Widget child,
+                                ImageChunkEvent? loadingProgress) {
                               if (loadingProgress == null) return child;
                               return Center(
                                 child: CircularProgressIndicator(
-                                  value: loadingProgress.expectedTotalBytes != null
-                                      ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                                  value: loadingProgress.expectedTotalBytes !=
+                                          null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                          loadingProgress.expectedTotalBytes!
                                       : null, // Progress indicator.
                                 ),
                               );
                             },
-                            errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                            errorBuilder: (BuildContext context,
+                                Object exception, StackTrace? stackTrace) {
                               return const Icon(Icons.error, color: Colors.red);
                             },
                           ),
@@ -90,7 +93,7 @@ class CartListSection extends StatelessWidget {
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        "\$${cartItem.variants.safeElementAt(0)?.price}",
+                        "\₹${cartItem.variants.safeElementAt(0)?.price}",
                         style: const TextStyle(
                           fontWeight: FontWeight.w900,
                           fontSize: 23,

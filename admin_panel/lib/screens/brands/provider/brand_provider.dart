@@ -1,11 +1,12 @@
 import 'dart:developer';
+
 import 'package:admin_panel/models/api_response.dart';
 import 'package:admin_panel/utility/snack_bar_helper.dart';
-
-import '../../../models/brand.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+
 import '../../../core/data/data_provider.dart';
+import '../../../models/brand.dart';
 import '../../../models/sub_category.dart';
 import '../../../services/http_services.dart';
 
@@ -32,7 +33,7 @@ class BrandProvider extends ChangeNotifier {
         ApiResponse apiResponse = ApiResponse.fromJson(response.body, null);
         if (apiResponse.success == true) {
           clearFields();
-          SnackBarHelper.showSuccessSnackBar('${apiResponse.message}');
+          SnackBarHelper.showSuccessSnackBar(apiResponse.message);
           _dataProvider.getAllBrands();
           log('Brand added');
         } else {
@@ -44,7 +45,7 @@ class BrandProvider extends ChangeNotifier {
             'Error ${response.body?['message'] ?? response.statusText}');
       }
     } catch (e) {
-      print(e);
+      log(e.toString());
       SnackBarHelper.showErrorSnackBar('An error occured: $e');
       rethrow;
     }
@@ -65,7 +66,7 @@ class BrandProvider extends ChangeNotifier {
           ApiResponse apiResponse = ApiResponse.fromJson(response.body, null);
           if (apiResponse.success == true) {
             clearFields();
-            SnackBarHelper.showSuccessSnackBar('${apiResponse.message}');
+            SnackBarHelper.showSuccessSnackBar(apiResponse.message);
             log('Brand updated');
             _dataProvider.getAllBrands();
           } else {
@@ -78,7 +79,7 @@ class BrandProvider extends ChangeNotifier {
         }
       }
     } catch (e) {
-      print(e);
+      log(e.toString());
       SnackBarHelper.showErrorSnackBar('An error occured: $e');
       rethrow;
     }
@@ -107,7 +108,7 @@ class BrandProvider extends ChangeNotifier {
             'Error ${response.body?['message'] ?? response.statusText}');
       }
     } catch (e) {
-      print(e);
+      log(e.toString());
       rethrow;
     }
   }

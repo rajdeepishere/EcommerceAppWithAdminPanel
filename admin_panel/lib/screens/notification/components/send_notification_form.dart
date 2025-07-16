@@ -1,12 +1,11 @@
 import 'package:admin_panel/widgets/custom_textfield.dart';
-
-import '../../../utility/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+
 import '../../../utility/constants.dart';
+import '../../../utility/extensions.dart';
 
 class SendNotificationForm extends StatelessWidget {
-
   const SendNotificationForm({super.key});
 
   @override
@@ -16,7 +15,7 @@ class SendNotificationForm extends StatelessWidget {
       child: Form(
         key: context.notificationProvider.sendNotificationFormKey,
         child: Container(
-          padding: EdgeInsets.all(defaultPadding),
+          padding: const EdgeInsets.all(defaultPadding),
           width: size.width * 0.5,
           decoration: BoxDecoration(
             color: bgColor,
@@ -25,7 +24,7 @@ class SendNotificationForm extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Gap(defaultPadding),
+              const Gap(defaultPadding),
               CustomTextField(
                 controller: context.notificationProvider.titleCtrl,
                 labelText: 'Enter Notification Title ....',
@@ -54,7 +53,7 @@ class SendNotificationForm extends StatelessWidget {
                 labelText: 'Enter Notification Image Url ....',
                 onSave: (val) {},
               ),
-              Gap(defaultPadding * 2),
+              const Gap(defaultPadding * 2),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -66,9 +65,9 @@ class SendNotificationForm extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text('Cancel'),
+                    child: const Text('Cancel'),
                   ),
-                  SizedBox(width: defaultPadding),
+                  const SizedBox(width: defaultPadding),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
@@ -76,13 +75,17 @@ class SendNotificationForm extends StatelessWidget {
                     ),
                     onPressed: () {
                       // Validate and save the form
-                      if (context.notificationProvider.sendNotificationFormKey.currentState!.validate()) {
-                        context.notificationProvider.sendNotificationFormKey.currentState!.save();
+                      if (context.notificationProvider.sendNotificationFormKey
+                          .currentState!
+                          .validate()) {
+                        context.notificationProvider.sendNotificationFormKey
+                            .currentState!
+                            .save();
                         context.notificationProvider.sendNotification();
                         Navigator.of(context).pop();
                       }
                     },
-                    child: Text('Send'),
+                    child: const Text('Send'),
                   ),
                 ],
               ),
@@ -101,9 +104,10 @@ void sendNotificationFormForm(BuildContext context) {
     builder: (BuildContext context) {
       return AlertDialog(
         backgroundColor: bgColor,
-        title: Center(child: Text('Send Notification'.toUpperCase(), style: TextStyle(color: primaryColor))),
-        content: SendNotificationForm(
-        ),
+        title: Center(
+            child: Text('Send Notification'.toUpperCase(),
+                style: const TextStyle(color: primaryColor))),
+        content: const SendNotificationForm(),
       );
     },
   );

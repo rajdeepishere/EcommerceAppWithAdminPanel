@@ -1,5 +1,5 @@
 // const MAIN_URL = 'http://localhost:3000';
-const MAIN_URL = '';
+const MAIN_URL = 'https://6954a5d1ca8e.ngrok-free.app';
 
 const FAVORITE_PRODUCT_BOX = 'FAVORITE_PRODUCT_BOX';
 const USER_INFO_BOX = 'USER_INFO_BOX';

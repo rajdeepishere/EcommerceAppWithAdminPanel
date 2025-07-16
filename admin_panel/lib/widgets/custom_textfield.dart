@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import '../utility/constants.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -16,7 +17,8 @@ class CustomTextField extends StatelessWidget {
     required this.onSave,
     this.inputType = TextInputType.text,
     this.lineNumber = 1,
-    this.validator, required this.controller,
+    this.validator,
+    required this.controller,
   });
 
   @override
@@ -30,7 +32,7 @@ class CustomTextField extends StatelessWidget {
           labelText: labelText,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
-            borderSide: BorderSide(color: secondaryColor),
+            borderSide: const BorderSide(color: secondaryColor),
           ),
         ),
         keyboardType: inputType,
@@ -40,7 +42,8 @@ class CustomTextField extends StatelessWidget {
         validator: validator,
         inputFormatters: [
           LengthLimitingTextInputFormatter(700),
-          if (inputType == TextInputType.number) FilteringTextInputFormatter.allow(RegExp(r'^-?\d*\.?\d*')),
+          if (inputType == TextInputType.number)
+            FilteringTextInputFormatter.allow(RegExp(r'^-?\d*\.?\d*')),
         ],
       ),
     );

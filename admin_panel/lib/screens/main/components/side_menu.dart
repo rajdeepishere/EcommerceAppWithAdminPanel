@@ -1,15 +1,12 @@
-import 'dart:ffi';
-
-import '../../../utility/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 
+import '../../../utility/extensions.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +76,6 @@ class SideMenu extends StatelessWidget {
             title: "Posters",
             svgSrc: "assets/icons/menu_doc.svg",
             press: () {
-
               context.mainScreenProvider.navigateToScreen('Poster');
             },
           ),
@@ -87,7 +83,6 @@ class SideMenu extends StatelessWidget {
             title: "Notifications",
             svgSrc: "assets/icons/menu_notification.svg",
             press: () {
-
               context.mainScreenProvider.navigateToScreen('Notifications');
             },
           ),
@@ -100,7 +95,6 @@ class SideMenu extends StatelessWidget {
 class DrawerListTile extends StatelessWidget {
   const DrawerListTile({
     super.key,
-
     required this.title,
     required this.svgSrc,
     required this.press,
@@ -116,12 +110,12 @@ class DrawerListTile extends StatelessWidget {
       horizontalTitleGap: 0.0,
       leading: SvgPicture.asset(
         svgSrc,
-        colorFilter: ColorFilter.mode(Colors.white54, BlendMode.srcIn),
+        colorFilter: const ColorFilter.mode(Colors.white54, BlendMode.srcIn),
         height: 16,
       ),
       title: Text(
         title,
-        style: TextStyle(color:  Colors.white54),
+        style: const TextStyle(color: Colors.white54),
       ),
     );
   }

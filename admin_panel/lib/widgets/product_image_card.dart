@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -42,17 +43,17 @@ class ProductImageCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                       child: kIsWeb
                           ? Image.network(
-                        imageFile?.path ?? '',
-                        width: double.infinity,
-                        height: 80,
-                        fit: BoxFit.scaleDown,
-                      )
+                              imageFile?.path ?? '',
+                              width: double.infinity,
+                              height: 80,
+                              fit: BoxFit.scaleDown,
+                            )
                           : Image.file(
-                        imageFile!,
-                        width: double.infinity,
-                        height: 80,
-                        fit: BoxFit.scaleDown,
-                      ),
+                              imageFile!,
+                              width: double.infinity,
+                              height: 80,
+                              fit: BoxFit.scaleDown,
+                            ),
                     )
                   else if (imageUrlForUpdateImage != null)
                     ClipRRect(
@@ -66,7 +67,7 @@ class ProductImageCard extends StatelessWidget {
                     )
                   else
                     Icon(Icons.camera_alt, size: 50, color: Colors.grey[600]),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     labelText,
                     style: TextStyle(
@@ -79,12 +80,15 @@ class ProductImageCard extends StatelessWidget {
             ),
           ),
         ),
-        if ( imageFile != null && onRemoveImage != null)
+        if (imageFile != null && onRemoveImage != null)
           Positioned(
             top: 0,
             right: 0,
             child: IconButton(
-              icon: Icon(Icons.close,color: Colors.red,),
+              icon: const Icon(
+                Icons.close,
+                color: Colors.red,
+              ),
               onPressed: onRemoveImage,
             ),
           ),

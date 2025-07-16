@@ -1,12 +1,11 @@
 import 'package:admin_panel/utility/extensions.dart';
-
-import '../../../core/data/data_provider.dart';
-import 'add_poster_form.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../core/data/data_provider.dart';
 import '../../../models/poster.dart';
 import '../../../utility/constants.dart';
-
+import 'add_poster_form.dart';
 
 class PosterListSection extends StatelessWidget {
   const PosterListSection({
@@ -16,10 +15,10 @@ class PosterListSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(defaultPadding),
+      decoration: const BoxDecoration(
         color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +34,7 @@ class PosterListSection extends StatelessWidget {
                 return DataTable(
                   columnSpacing: defaultPadding,
                   // minWidth: 600,
-                  columns: [
+                  columns: const [
                     DataColumn(
                       label: Text("Category Name"),
                     ),
@@ -48,9 +47,10 @@ class PosterListSection extends StatelessWidget {
                   ],
                   rows: List.generate(
                     dataProvider.posters.length,
-                    (index) => posterDataRow(dataProvider.posters[index], delete: () {
-                      context.posterProvider.deletePoster(dataProvider.posters[index]);
-
+                    (index) =>
+                        posterDataRow(dataProvider.posters[index], delete: () {
+                      context.posterProvider
+                          .deletePoster(dataProvider.posters[index]);
                     }, edit: () {
                       showAddPosterForm(context, dataProvider.posters[index]);
                     }),
@@ -75,8 +75,9 @@ DataRow posterDataRow(Poster poster, {Function? edit, Function? delete}) {
               poster.imageUrl ?? '',
               height: 30,
               width: 30,
-              errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                return Icon(Icons.error);
+              errorBuilder: (BuildContext context, Object exception,
+                  StackTrace? stackTrace) {
+                return const Icon(Icons.error);
               },
             ),
             Padding(
@@ -90,7 +91,7 @@ DataRow posterDataRow(Poster poster, {Function? edit, Function? delete}) {
           onPressed: () {
             if (edit != null) edit();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.edit,
             color: Colors.white,
           ))),
@@ -98,7 +99,7 @@ DataRow posterDataRow(Poster poster, {Function? edit, Function? delete}) {
           onPressed: () {
             if (delete != null) delete();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.delete,
             color: Colors.red,
           ))),

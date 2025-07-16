@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
 import '../../utility/app_color.dart';
 
 class TrackingScreen extends StatelessWidget {
@@ -14,8 +15,7 @@ class TrackingScreen extends StatelessWidget {
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
         NavigationDelegate(
-          onProgress: (int progress) {
-          },
+          onProgress: (int progress) {},
           onPageStarted: (String url) {},
           onPageFinished: (String url) {},
           onWebResourceError: (WebResourceError error) {},
@@ -29,7 +29,10 @@ class TrackingScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           "Track Order",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColor.darkOrange),
+          style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: AppColor.darkOrange),
         ),
       ),
       body: WebViewWidget(

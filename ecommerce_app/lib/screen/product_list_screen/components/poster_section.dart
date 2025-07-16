@@ -1,8 +1,8 @@
-import '../../../core/data/data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../../utility/app_data.dart';
 
+import '../../../../../utility/app_data.dart';
+import '../../../core/data/data_provider.dart';
 
 class PosterSection extends StatelessWidget {
   const PosterSection({super.key});
@@ -37,8 +37,7 @@ class PosterSection extends StatelessWidget {
                           children: [
                             Text(
                               '${dataProvider.posters[index].posterName}',
-                              style: Theme
-                                  .of(context)
+                              style: Theme.of(context)
                                   .textTheme
                                   .displaySmall
                                   ?.copyWith(color: Colors.white),
@@ -49,7 +48,8 @@ class PosterSection extends StatelessWidget {
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
                                 elevation: 0,
-                                padding: const EdgeInsets.symmetric(horizontal: 18),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 18),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(18),
                                 ),
@@ -67,17 +67,20 @@ class PosterSection extends StatelessWidget {
                         '${dataProvider.posters[index].imageUrl}',
                         height: 125,
                         fit: BoxFit.cover,
-                        loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                        loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent? loadingProgress) {
                           if (loadingProgress == null) return child;
                           return Center(
                             child: CircularProgressIndicator(
                               value: loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
-                                  : null,  // Progress indicator.
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                  : null, // Progress indicator.
                             ),
                           );
                         },
-                        errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                        errorBuilder: (BuildContext context, Object exception,
+                            StackTrace? stackTrace) {
                           return const Icon(Icons.error, color: Colors.red);
                         },
                       )

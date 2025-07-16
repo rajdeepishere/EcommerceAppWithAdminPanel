@@ -1,24 +1,34 @@
 import 'package:ecommerce_app/models/user.dart';
-
-import '../../core/data/data_provider.dart';
-import '../tracking_screen/tracking_screen.dart';
-import '../../utility/app_color.dart';
-import '../../utility/extensions.dart';
-import '../../utility/utility_extention.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import '../../widget/order_tile.dart';
 
-class MyOrderScreen extends StatelessWidget {
+import '../../core/data/data_provider.dart';
+import '../../utility/app_color.dart';
+import '../../utility/utility_extention.dart';
+import '../../widget/order_tile.dart';
+import '../tracking_screen/tracking_screen.dart';
+
+class MyOrderScreen extends StatefulWidget {
   const MyOrderScreen({super.key});
 
   @override
+  State<MyOrderScreen> createState() => _MyOrderScreenState();
+}
+
+class _MyOrderScreenState extends State<MyOrderScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    Future.microtask(() {
+      final provider = context.read<DataProvider>();
+      provider.getAllOrderByUser(User());
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    //TODO: should complete call getAllOrderByUser
-    context.dataProvider.getAllOrderByUser(User(
-      
-    ));
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -31,10 +41,16 @@ class MyOrderScreen extends StatelessWidget {
       ),
       body: Consumer<DataProvider>(
         builder: (context, provider, child) {
+          final orders = provider.orders;
+
+          if (orders.isEmpty) {
+            return const Center(child: Text('No orders found.'));
+          }
+
           return ListView.builder(
-            itemCount: context.dataProvider.orders.length,
+            itemCount: orders.length,
             itemBuilder: (context, index) {
-              final order = context.dataProvider.orders[index];
+              final order = orders[index];
               return OrderTile(
                 paymentMethod: order.paymentMethod ?? '',
                 items:

@@ -1,9 +1,9 @@
 import 'package:admin_panel/utility/extensions.dart';
-
-import '../../../core/data/data_provider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../core/data/data_provider.dart';
 import '../../../utility/constants.dart';
 
 class Chart extends StatelessWidget {
@@ -29,21 +29,22 @@ class Chart extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: defaultPadding),
+                const SizedBox(height: defaultPadding),
                 Consumer<DataProvider>(
                   builder: (context, dataProvider, child) {
                     return Text(
-                      '${context.dataProvider.calculateOrdersWithStatus()}', 
-                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        height: 0.5,
-                      ),
+                      '${context.dataProvider.calculateOrdersWithStatus()}',
+                      style:
+                          Theme.of(context).textTheme.headlineMedium!.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                height: 0.5,
+                              ),
                     );
                   },
                 ),
-                SizedBox(height: defaultPadding),
-                Text("Order")
+                const SizedBox(height: defaultPadding),
+                const Text("Order")
               ],
             ),
           ),
@@ -53,36 +54,41 @@ class Chart extends StatelessWidget {
   }
 
   List<PieChartSectionData> _buildPieChartSelectionData(BuildContext context) {
-    final DataProvider dataProvider = Provider.of<DataProvider>(context);
+    // final DataProvider dataProvider = Provider.of<DataProvider>(context);
 
-    int totalOrder = context.dataProvider.calculateOrdersWithStatus();
-    int pendingOrder = context.dataProvider.calculateOrdersWithStatus(status: 'pending');
-    int processingOrder = context.dataProvider.calculateOrdersWithStatus(status: 'processing');
-    int cancelledOrder = context.dataProvider.calculateOrdersWithStatus(status: 'cancelled');
-    int shippedOrder = context.dataProvider.calculateOrdersWithStatus(status: 'shipped');
-    int deliveredOrder = context.dataProvider.calculateOrdersWithStatus(status: 'delivered');
+    // int totalOrder = context.dataProvider.calculateOrdersWithStatus();
+    int pendingOrder =
+        context.dataProvider.calculateOrdersWithStatus(status: 'pending');
+    int processingOrder =
+        context.dataProvider.calculateOrdersWithStatus(status: 'processing');
+    int cancelledOrder =
+        context.dataProvider.calculateOrdersWithStatus(status: 'cancelled');
+    int shippedOrder =
+        context.dataProvider.calculateOrdersWithStatus(status: 'shipped');
+    int deliveredOrder =
+        context.dataProvider.calculateOrdersWithStatus(status: 'delivered');
 
     List<PieChartSectionData> pieChartSelectionData = [
       PieChartSectionData(
-        color: Color(0xFFFFCF26),
+        color: const Color(0xFFFFCF26),
         value: pendingOrder.toDouble(),
         showTitle: false,
         radius: 20,
       ),
       PieChartSectionData(
-        color: Color(0xFFEE2727),
+        color: const Color(0xFFEE2727),
         value: cancelledOrder.toDouble(),
         showTitle: false,
         radius: 20,
       ),
       PieChartSectionData(
-        color: Color(0xFF2697FF),
+        color: const Color(0xFF2697FF),
         value: shippedOrder.toDouble(),
         showTitle: false,
         radius: 20,
       ),
       PieChartSectionData(
-        color: Color(0xFF26FF31),
+        color: const Color(0xFF26FF31),
         value: deliveredOrder.toDouble(),
         showTitle: false,
         radius: 20,
@@ -98,4 +104,3 @@ class Chart extends StatelessWidget {
     return pieChartSelectionData;
   }
 }
-

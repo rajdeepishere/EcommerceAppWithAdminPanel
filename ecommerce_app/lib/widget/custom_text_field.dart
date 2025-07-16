@@ -18,9 +18,10 @@ class CustomTextField extends StatelessWidget {
     required this.onSave,
     this.inputType = TextInputType.text,
     this.lineNumber = 1,
-    this.validator, required this.controller, this.height,
+    this.validator,
+    required this.controller,
+    this.height,
   });
-
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,8 @@ class CustomTextField extends StatelessWidget {
           validator: validator,
           inputFormatters: [
             LengthLimitingTextInputFormatter(700),
-            if (inputType == TextInputType.number) FilteringTextInputFormatter.allow(RegExp(r'^-?\d*\.?\d*')),
+            if (inputType == TextInputType.number)
+              FilteringTextInputFormatter.allow(RegExp(r'^-?\d*\.?\d*')),
           ],
         ),
       ),

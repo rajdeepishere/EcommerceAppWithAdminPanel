@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' hide Category;
 import 'package:get/get.dart';
+
 import '../../../models/category.dart';
 import '../../models/api_response.dart';
 import '../../models/brand.dart';
@@ -28,24 +29,18 @@ class DataProvider extends ChangeNotifier {
   List<Brand> _filteredBrands = [];
   List<Brand> get brands => _filteredBrands;
 
-
-
   List<Product> _allProducts = [];
   List<Product> _filteredProducts = [];
   List<Product> get products => _filteredProducts;
   List<Product> get allProducts => _allProducts;
 
-
   List<Poster> _allPosters = [];
   List<Poster> _filteredPosters = [];
   List<Poster> get posters => _filteredPosters;
 
-
   List<Order> _allOrders = [];
   List<Order> _filteredOrders = [];
   List<Order> get orders => _filteredOrders;
-
-
 
   DataProvider() {
     getAllProduct();
@@ -55,7 +50,7 @@ class DataProvider extends ChangeNotifier {
     getAllPosters();
   }
 
-    Future<List<Category>> getAllCategory({bool showSnack = false}) async {
+  Future<List<Category>> getAllCategory({bool showSnack = false}) async {
     try {
       Response response = await service.getItems(endpointUrl: 'categories');
       if (response.isOk) {
@@ -157,49 +152,64 @@ class DataProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
- Future<void> getAllProduct({bool showSnack = false}) async {
+  Future<void> getAllProduct({bool showSnack = false}) async {
     try {
       Response response = await service.getItems(endpointUrl: 'products');
-      ApiResponse<List<Product>> apiResponse = ApiResponse<List<Product>>.fromJson(response.body, (json) => (json as List).map((item) => Product.fromJson(item)).toList(),);
+      ApiResponse<List<Product>> apiResponse =
+          ApiResponse<List<Product>>.fromJson(
+        response.body,
+        (json) => (json as List).map((item) => Product.fromJson(item)).toList(),
+      );
       _allProducts = apiResponse.data ?? [];
       _filteredProducts = List.from(_allProducts);
       notifyListeners();
-      if(showSnack) SnackBarHelper.showSuccessSnackBar(apiResponse.message);
+      if (showSnack) SnackBarHelper.showSuccessSnackBar(apiResponse.message);
     } catch (e) {
       // rethrow;
-      if(showSnack) SnackBarHelper.showErrorSnackBar(e.toString());
+      if (showSnack) SnackBarHelper.showErrorSnackBar(e.toString());
     }
   }
 
   void filterProducts(String keyword) {
     if (keyword.isEmpty) {
       _filteredProducts = List.from(_allProducts);
-    }else{
+    } else {
       final lowerKeyword = keyword.toLowerCase();
 
       _filteredProducts = _allProducts.where((product) {
-        final ProductNameContainsKeyword = (product.name ?? '').toLowerCase().contains(lowerKeyword);
-        final categoryNameContainsKeyword = product.proSubCategoryId?.name?.toLowerCase().contains(lowerKeyword) ?? false;
-        final subCategoryNameContainsKeyword = product.proSubCategoryId?.name?.toLowerCase().contains(lowerKeyword) ?? false;
+        final ProductNameContainsKeyword =
+            (product.name ?? '').toLowerCase().contains(lowerKeyword);
+        final categoryNameContainsKeyword = product.proSubCategoryId?.name
+                ?.toLowerCase()
+                .contains(lowerKeyword) ??
+            false;
+        final subCategoryNameContainsKeyword = product.proSubCategoryId?.name
+                ?.toLowerCase()
+                .contains(lowerKeyword) ??
+            false;
 
-        return ProductNameContainsKeyword || categoryNameContainsKeyword || subCategoryNameContainsKeyword;
-      } ).toList();
+        return ProductNameContainsKeyword ||
+            categoryNameContainsKeyword ||
+            subCategoryNameContainsKeyword;
+      }).toList();
     }
     notifyListeners();
   }
 
-
-
-  Future <List<Poster>> getAllPosters({bool showSnack = false}) async {
+  Future<List<Poster>> getAllPosters({bool showSnack = false}) async {
     try {
       Response response = await service.getItems(endpointUrl: 'posters');
       if (response.isOk) {
-        ApiResponse <List<Poster>> apiResponse = ApiResponse<List<Poster>>.fromJson(response.body, (json) => (json as List).map((item) => Poster.fromJson(item)).toList(),);
+        ApiResponse<List<Poster>> apiResponse =
+            ApiResponse<List<Poster>>.fromJson(
+          response.body,
+          (json) =>
+              (json as List).map((item) => Poster.fromJson(item)).toList(),
+        );
         _allPosters = apiResponse.data ?? [];
         _filteredPosters = List.from(_allPosters);
         notifyListeners();
-        if(showSnack) SnackBarHelper.showSuccessSnackBar(apiResponse.message);
+        if (showSnack) SnackBarHelper.showSuccessSnackBar(apiResponse.message);
       }
     } catch (e) {
       if (showSnack) SnackBarHelper.showErrorSnackBar(e.toString());
@@ -208,23 +218,27 @@ class DataProvider extends ChangeNotifier {
     return _filteredPosters;
   }
 
-
-  Future<void>getAllOrderByUser(User? user,{bool showSnack=false}) async {
+  Future<void> getAllOrderByUser(User? user, {bool showSnack = false}) async {
     try {
       final userId = user?.sId;
-      Response response = await service.getItems(endpointUrl: 'orders/orderByUserId/$userId');
+      Response response =
+          await service.getItems(endpointUrl: 'orders/orderByUserId/$userId');
       if (response.isOk) {
-        ApiResponse<List<Order>> apiResponse = ApiResponse<List<Order>>.fromJson(response.body, (json) => (json as List).map((item) => Order.fromJson(item)).toList());
+        ApiResponse<List<Order>> apiResponse =
+            ApiResponse<List<Order>>.fromJson(
+                response.body,
+                (json) => (json as List)
+                    .map((item) => Order.fromJson(item))
+                    .toList());
         _allOrders = apiResponse.data ?? [];
         _filteredOrders = _allOrders;
         notifyListeners();
-        if(showSnack) SnackBarHelper.showSuccessSnackBar(apiResponse.message);
+        if (showSnack) SnackBarHelper.showSuccessSnackBar(apiResponse.message);
       }
     } catch (e) {
-      if(showSnack) SnackBarHelper.showErrorSnackBar(e.toString());
+      if (showSnack) SnackBarHelper.showErrorSnackBar(e.toString());
     }
   }
-
 
   double calculateDiscountPercentage(num originalPrice, num? discountedPrice) {
     if (originalPrice <= 0) {
@@ -235,14 +249,13 @@ class DataProvider extends ChangeNotifier {
     num finalDiscountedPrice = discountedPrice ?? originalPrice;
 
     if (finalDiscountedPrice > originalPrice) {
-     return originalPrice.toDouble();
+      return originalPrice.toDouble();
     }
 
-    double discount = ((originalPrice - finalDiscountedPrice) / originalPrice) * 100;
+    double discount =
+        ((originalPrice - finalDiscountedPrice) / originalPrice) * 100;
 
     //? Return the discount percentage as an integer
     return discount;
   }
-
-
 }

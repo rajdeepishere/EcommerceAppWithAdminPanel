@@ -1,13 +1,14 @@
 import 'package:admin_panel/models/product_summary_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../utility/constants.dart';
 
+import '../../../utility/constants.dart';
 
 class ProductSummaryCard extends StatelessWidget {
   const ProductSummaryCard({
     super.key,
-    required this.info, required this.onTap,
+    required this.info,
+    required this.onTap,
   });
 
   final ProductSummaryInfo info;
@@ -16,14 +17,14 @@ class ProductSummaryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
+      onTap: () {
         onTap(info.title);
       },
       child: Container(
-        padding: EdgeInsets.all(defaultPadding),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.all(defaultPadding),
+        decoration: const BoxDecoration(
           color: secondaryColor,
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,7 +34,7 @@ class ProductSummaryCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  padding: EdgeInsets.all(defaultPadding * 0.75),
+                  padding: const EdgeInsets.all(defaultPadding * 0.75),
                   height: 40,
                   width: 40,
                   decoration: BoxDecoration(
@@ -46,7 +47,7 @@ class ProductSummaryCard extends StatelessWidget {
                         info.color ?? Colors.black, BlendMode.srcIn),
                   ),
                 ),
-                Icon(Icons.more_vert, color: Colors.white54)
+                const Icon(Icons.more_vert, color: Colors.white54)
               ],
             ),
             Text(
@@ -79,10 +80,10 @@ class ProductSummaryCard extends StatelessWidget {
 
 class ProgressLine extends StatelessWidget {
   const ProgressLine({
-    Key? key,
+    super.key,
     this.color = primaryColor,
     required this.percentage,
-  }) : super(key: key);
+  });
 
   final Color? color;
   final double? percentage;
@@ -96,7 +97,7 @@ class ProgressLine extends StatelessWidget {
           height: 5,
           decoration: BoxDecoration(
             color: color!.withOpacity(0.1),
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
         ),
         LayoutBuilder(
@@ -105,7 +106,7 @@ class ProgressLine extends StatelessWidget {
             height: 5,
             decoration: BoxDecoration(
               color: color,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
             ),
           ),
         ),

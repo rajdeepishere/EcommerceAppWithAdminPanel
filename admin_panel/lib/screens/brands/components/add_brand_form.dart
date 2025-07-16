@@ -1,14 +1,14 @@
 import 'package:admin_panel/widgets/custom_textfield.dart';
-
-import '../../../models/sub_category.dart';
-import '../provider/brand_provider.dart';
-import '../../../utility/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
+
 import '../../../models/brand.dart';
+import '../../../models/sub_category.dart';
 import '../../../utility/constants.dart';
+import '../../../utility/extensions.dart';
 import '../../../widgets/custom_dropdown.dart';
+import '../provider/brand_provider.dart';
 
 class BrandSubmitForm extends StatelessWidget {
   final Brand? brand;
@@ -23,7 +23,7 @@ class BrandSubmitForm extends StatelessWidget {
       child: Form(
         key: context.brandProvider.addBrandFormKey,
         child: Container(
-          padding: EdgeInsets.all(defaultPadding),
+          padding: const EdgeInsets.all(defaultPadding),
           width: size.width * 0.5,
           decoration: BoxDecoration(
             color: bgColor,
@@ -32,7 +32,7 @@ class BrandSubmitForm extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Gap(defaultPadding),
+              const Gap(defaultPadding),
               Row(
                 children: [
                   Expanded(
@@ -41,8 +41,10 @@ class BrandSubmitForm extends StatelessWidget {
                         return CustomDropdown(
                           initialValue: brandProvider.selectedSubCategory,
                           items: context.dataProvider.subCategories,
-                          hintText: brandProvider.selectedSubCategory?.name ?? 'Select Sub Category',
-                          displayItem: (SubCategory? subCategory) => subCategory?.name ?? '',
+                          hintText: brandProvider.selectedSubCategory?.name ??
+                              'Select Sub Category',
+                          displayItem: (SubCategory? subCategory) =>
+                              subCategory?.name ?? '',
                           onChanged: (newValue) {
                             brandProvider.selectedSubCategory = newValue;
                             brandProvider.updateUI();
@@ -72,7 +74,7 @@ class BrandSubmitForm extends StatelessWidget {
                   ),
                 ],
               ),
-              Gap(defaultPadding * 2),
+              const Gap(defaultPadding * 2),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -84,9 +86,9 @@ class BrandSubmitForm extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pop(); // Close the popup
                     },
-                    child: Text('Cancel'),
+                    child: const Text('Cancel'),
                   ),
-                  SizedBox(width: defaultPadding),
+                  const SizedBox(width: defaultPadding),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
@@ -94,13 +96,16 @@ class BrandSubmitForm extends StatelessWidget {
                     ),
                     onPressed: () {
                       // Validate and save the form
-                      if (context.brandProvider.addBrandFormKey.currentState!.validate()) {
-                        context.brandProvider.addBrandFormKey.currentState!.save();
+                      if (context.brandProvider.addBrandFormKey.currentState!
+                          .validate()) {
+                        context.brandProvider.addBrandFormKey.currentState!
+                            .save();
                         context.brandProvider.submitBrand();
                         Navigator.of(context).pop();
                       }
+                      
                     },
-                    child: Text('Submit'),
+                    child: const Text('Submit'),
                   ),
                 ],
               ),
@@ -119,7 +124,9 @@ void showBrandForm(BuildContext context, Brand? brand) {
     builder: (BuildContext context) {
       return AlertDialog(
         backgroundColor: bgColor,
-        title: Center(child: Text('Add Brand'.toUpperCase(), style: TextStyle(color: primaryColor))),
+        title: Center(
+            child: Text('Add Brand'.toUpperCase(),
+                style: const TextStyle(color: primaryColor))),
         content: BrandSubmitForm(
           brand: brand,
         ),

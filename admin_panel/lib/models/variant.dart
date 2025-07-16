@@ -7,30 +7,30 @@ class Variant {
 
   Variant(
       {this.sId,
-        this.name,
-        this.variantTypeId,
-        this.createdAt,
-        this.updatedAt});
+      this.name,
+      this.variantTypeId,
+      this.createdAt,
+      this.updatedAt});
 
   Variant.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     name = json['name'];
     variantTypeId = json['variantTypeId'] != null
-        ? new VariantTypeId.fromJson(json['variantTypeId'])
+        ? VariantTypeId.fromJson(json['variantTypeId'])
         : null;
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['name'] = this.name;
-    if (this.variantTypeId != null) {
-      data['variantTypeId'] = this.variantTypeId!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    data['name'] = name;
+    if (variantTypeId != null) {
+      data['variantTypeId'] = variantTypeId!.toJson();
     }
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
     return data;
   }
 }
@@ -54,12 +54,12 @@ class VariantTypeId {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['name'] = this.name;
-    data['type'] = this.type;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    data['name'] = name;
+    data['type'] = type;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
     return data;
   }
 }
